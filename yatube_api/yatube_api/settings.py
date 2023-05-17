@@ -1,5 +1,5 @@
 from datetime import timedelta
-from pathlib import Path
+from pathlib import Path, PurePath
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'djoser',
     'api',
     'posts',
@@ -87,13 +88,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = PurePath.joinpath(BASE_DIR, 'media')
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ((BASE_DIR / 'static/'),)
 
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly', 
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -103,9 +107,9 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-   'ACCESS_TOKEN_LIFETIME': timedelta(days=60),
-   'AUTH_HEADER_TYPES': ('Bearer',),
-} 
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=60),
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
